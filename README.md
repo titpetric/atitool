@@ -12,6 +12,15 @@ It's inspired by PolarisBiosEditor. PBE is written in C# with Winforms GUI and h
 * GPU clock data.
 * Memory clock data.
 
+# Platforms
+Tested
+* macOS
+
+Not tested
+* Linux
+* Windows
+
+
 # TODO
 * Allow modifying memory timings saved to a new ROM file.
 
