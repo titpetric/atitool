@@ -13,7 +13,7 @@ It's inspired by PolarisBiosEditor. PBE is written in C# with Winforms GUI and h
 * Memory clock data.
 
 # TODO
-* Modifying values and saving to a new ROM file.
+* Allow modifying memory timings saved to a new ROM file.
 
 # Compiling
 ```
