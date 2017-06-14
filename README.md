@@ -1,7 +1,7 @@
 # atitool
-Atitool is a tool for reading ATI Radeon RX 400 and 500 series VBIOS ROM files.
+Atitool is a tool for reading ATI Radeon RX 400 and 500 series VBIOS ROM files. 
 
-It outputs the following information.
+It's inspired by PolarisBiosEditor. PBE is written in C# with Winforms GUI and has a terrible cross-platform experience. Atitool is designed to overcome those limitations. It outputs the following information.
 
 * ROM data.
 * Powerplay data.
@@ -11,6 +11,9 @@ It outputs the following information.
 * Memory voltage data.
 * GPU clock data.
 * Memory clock data.
+
+# TODO
+* Modifying values and saving to a new ROM file.
 
 # Compiling
 ```
