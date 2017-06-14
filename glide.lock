@@ -1,0 +1,24 @@
+hash: 76aad2c4e15979d153b9a1eff024139aa04b287a7d114d2688e3917a5af28a40
+updated: 2017-06-13T21:16:07.269486839-04:00
+imports:
+- name: github.com/alecthomas/kingpin
+  version: 7f0871f2e17818990e4eed73f9b5c2f429501228
+- name: github.com/alecthomas/template
+  version: a0175ee3bccc567396460bf5acd36800cb10c49c
+  subpackages:
+  - parse
+- name: github.com/alecthomas/units
+  version: 2efee857e7cfd4f3d0138cc3cbb1b4966962b93a
+- name: github.com/ttacon/chalk
+  version: 76b3c8b611dea8f83e49e9ce81fc2b189e0ef3d2
+- name: golang.org/x/text
+  version: 2910a502d2bf9e43193af9d68ca516529614eed3
+  subpackages:
+  - encoding
+  - encoding/charmap
+  - encoding/internal
+  - encoding/internal/identifier
+  - transform
+- name: gopkg.in/restruct.v1
+  version: 80ede2e57cc280052ab88753387703aa62475571
+testImports: []

@@ -1,0 +1,13 @@
+package: github.com/kellabyte/atitool
+import:
+- package: github.com/alecthomas/kingpin
+  version: ~2.2.4
+- package: github.com/alecthomas/template
+- package: github.com/alecthomas/units
+- package: github.com/ttacon/chalk
+  version: ~0.1.0
+- package: gopkg.in/restruct.v1
+  version: ~1.0.0
+- package: golang.org/x/text
+  subpackages:
+  - encoding/charmap
