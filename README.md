@@ -48,4 +48,4 @@ Commands:
 ```
 
 # Example
-<img src="screenshot.png" width="100%"/>
+<img src="screenshot.png" width="75%"/>
