@@ -23,6 +23,7 @@ Not tested
 
 # TODO
 * Allow modifying memory timings saved to a new ROM file.
+* Builds for Linux, macOS and Windows.
 
 # Compiling
 ```
