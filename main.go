@@ -158,8 +158,8 @@ func displayMemory(bios Bios) {
 	fmt.Println(count)
 	for i := 0; i < count; i++ {
 		index := int(bios.AtomMClkTable.Entries[i].Mclk)
-		fmt.Printf("%s%d %s: %s%d %s%s\n", chalk.Bold, bios.AtomMClkTable.Entries[i].VddcInd / 100, "mV", chalk.White,
-			bios.AtomVoltageTable.Entries[index].Vdd, "Mhz", chalk.Reset)
+		fmt.Printf("%s%d %s: %s%d %s%s\n", chalk.Bold, bios.AtomMClkTable.Entries[i].VddcInd / 100, "Mhz", chalk.White,
+			bios.AtomVoltageTable.Entries[index].Vdd, "mV", chalk.Reset)
 	}
 }
 
@@ -168,19 +168,43 @@ func displayVRAM(bios Bios) {
 	fmt.Printf("%s%s%s\n", chalk.Blue, "VRAM", chalk.Reset)
 	fmt.Printf("%s----------------------------------------%s\n", chalk.Blue, chalk.Reset)
 
-	//count := int(bios.AtomVRAMInfo.NumOfVRAMModule)
-	//for i := 0; i < count; i++ {
-	//	if bios.AtomVRAMInfo.VramInfo[i].MemPNString[0] != 0 {
-	//		fmt.Printf("%s%s %s: %s%d %s%s\n", chalk.Bold, string(bios.AtomVRAMInfo.VramInfo[i].MemPNString[:10]), "Mhz", chalk.White,
-	//			"", "Timing", chalk.Reset)
-	//
-	//	}
-	//}
-
-	count := int(bios.AtomVRAMInfo.NumOfVRAMModule)
+	count := len(bios.AtomVRAMEntry)
 	for i := 0; i < count; i++ {
-		if bios.AtomVRAMInfo.VramInfo[i].MemPNString[0] != 0 {
-			fmt.Printf("%s\n", string(bios.AtomVRAMInfo.VramInfo[i].MemPNString[:10]))
+		if bios.AtomVRAMEntry[i].MemPNString[0] != 0 {
+			if i > 1 {
+				fmt.Println()
+			}
+
+			fmt.Printf("%s%s: %s%s %s\n", chalk.Bold, "Part num", chalk.White,
+				string(bios.AtomVRAMEntry[i].MemPNString[:10]), chalk.Reset)
+			fmt.Printf("\t%s%s: %s0x%x %s\n", chalk.Bold, "VendorID", chalk.White,
+				bios.AtomVRAMEntry[i].MemoryVenderID, chalk.Reset)
+			fmt.Printf("\t%s%s: %s%d %s\n", chalk.Bold, "Size (MB)", chalk.White,
+				bios.AtomVRAMEntry[i].MemorySize, chalk.Reset)
+			fmt.Printf("\t%s%s: %s0x%x %s\n", chalk.Bold, "Density", chalk.White,
+				bios.AtomVRAMEntry[i].Density, chalk.Reset)
+
+			memoryType := "Unknown"
+			switch bios.AtomVRAMEntry[i].MemoryType {
+			case MemoryTypeGDDR1:
+				memoryType = "GDDR1"
+			case MemoryTypeDDR2:
+				memoryType = "DDR2"
+			case MemoryTypeGDDR3:
+				memoryType = "GDDR3"
+			case MemoryTypeGDDR4:
+				memoryType = "GDDR4"
+			case MemoryTypeGDDR5:
+				memoryType = "GDDR5"
+			case MemoryTypeHBM:
+				memoryType = "HBM"
+			case MemoryTypeDDR3:
+				memoryType = "DDR3"
+			}
+			fmt.Printf("\t%s%s: %s%s %s\n", chalk.Bold, "Type", chalk.White,
+				memoryType, chalk.Reset)
+
+
 		}
 	}
 }

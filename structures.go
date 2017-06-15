@@ -4,6 +4,14 @@ const (
 	AtomROMChecksumOffset 	= 0x21
 	AtomROMHeaderPtr      	= 0x48
 	AtomMaxVRAMEntries 	= 24
+
+	MemoryTypeGDDR1 	= 0x10
+	MemoryTypeDDR2 		= 0x20
+	MemoryTypeGDDR3 	= 0x30
+	MemoryTypeGDDR4 	= 0x40
+	MemoryTypeGDDR5 	= 0x50
+	MemoryTypeHBM 		= 0x60
+	MemoryTypeDDR3 		= 0xB0
 )
 
 type Bios struct {
@@ -16,7 +24,8 @@ type Bios struct {
 	AtomSClkTable AtomSClkTable
 	AtomVoltageTable AtomVoltageTable
 	AtomVRAMInfo AtomVRAMInfo
-	AtomVRAMTimingEntry [AtomMaxVRAMEntries]AtomVRAMTimingEntry
+	AtomVRAMTimingEntry []AtomVRAMTimingEntry
+	AtomVRAMEntry []AtomVRAMEntry
 }
 
 type AtomCommonTableHeader struct {
@@ -263,9 +272,9 @@ type AtomVRAMInfo struct {
 	McPhyInitTableOffset     uint16
 	DramDataRemapTblOffset   uint16
 	_                        uint16
-	NumOfVRAMModule          byte `struct:"sizeof=VramInfo"`
+	NumOfVRAMModule          byte //`struct:"sizeof=VramInfo"`
 	MemoryClkPatchTblVer     byte
 	VramModuleVer            byte
 	McPhyTileNum             byte
-	VramInfo                 []AtomVRAMEntry
+	//VramInfo                 []AtomVRAMEntry
 }

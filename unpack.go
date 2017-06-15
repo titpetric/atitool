@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"encoding/binary"
 	"gopkg.in/restruct.v1"
-	//"unsafe"
 )
 
 func unpackData(buffer []byte) Bios {
@@ -59,33 +58,16 @@ func unpackData(buffer []byte) Bios {
 	unpack(buffer, voltageOffset, &voltageTable)
 	bios.AtomVoltageTable = voltageTable
 
-	// Unpack vram info.
-	//vramInfo := AtomVRAMInfo{}
-	//vramInfoOffset := dataTable.VRAMInfo
-	//unpack(buffer, vramInfoOffset, &vramInfo)
-	//bios.AtomVRAMInfo = vramInfo
-
-	// Unpack vram timings.
-	//vramTimingEntries := [AtomMaxVRAMEntries]AtomVRAMTimingEntry{}
-	//vramTimingOffset := vramInfoOffset + vramInfo.MemClkPatchTblOffset + 0x2E
-	//for i:= 0; i< AtomMaxVRAMEntries; i++ {
-	//	vramTimingEntryOffset := vramTimingOffset + uint16(unsafe.Sizeof(AtomVRAMTimingEntry{})) * uint16(i)
-	//	unpack(buffer, vramTimingEntryOffset, &vramTimingEntries[i])
-	//
-	//	if (vramTimingEntries[i].ClkRange == 0) {
-	//		VRAM_ENTRIES_COUNT = i
-	//	}
-	//}
-	//bios.AtomVRAMTimingEntry = vramTimingEntries
-
 	// Unpack VRAM info.
+	vramInfoOffset := dataTable.VRAMInfo
 	vramInfo := AtomVRAMInfo{}
-	err := restruct.Unpack(buffer[dataTable.VRAMInfo:], binary.LittleEndian, &vramInfo)
+	err := restruct.Unpack(buffer[vramInfoOffset:], binary.LittleEndian, &vramInfo)
 	if err != nil {
 		fmt.Println(chalk.Red, "Error unpacking VRAM info: ", err, chalk.Reset)
 		os.Exit(1)
 
 	}
+	bios.AtomVRAMInfo = vramInfo
 
 	// HACK: determine sizeof VRAM info.
 	// See restruct issue #5.
@@ -94,21 +76,34 @@ func unpackData(buffer []byte) Bios {
 		fmt.Println(chalk.Red, "Error sizing VRAM info: ", err, chalk.Reset)
 		os.Exit(1)
 	}
-	bios.AtomVRAMInfo = vramInfo
+
+	numberOfVRAMModule := int(vramInfo.NumOfVRAMModule)
+	vramEntryOffset := int(vramInfoOffset) + len(vramInfoData)
+	vramEntries := make([]AtomVRAMEntry, numberOfVRAMModule)
+	for i := 0; i < numberOfVRAMModule; i++ {
+		err := restruct.Unpack(buffer[vramEntryOffset:], binary.LittleEndian, &vramEntries[i])
+		if err != nil {
+			fmt.Println(chalk.Red, "Error unpacking VRAM entry: ", err, chalk.Reset)
+		}
+		vramEntryOffset += int(vramEntries[i].ModuleSize)
+	}
+	bios.AtomVRAMEntry = vramEntries
 
 	// Loop over VRAM timing entries.
-	vramTimingPtr := int(dataTable.VRAMInfo) + len(vramInfoData)
-	vramTimingEntries := [AtomMaxVRAMEntries]AtomVRAMTimingEntry{}
-	for i := range vramTimingEntries {
-		err := restruct.Unpack(buffer[vramTimingPtr:], binary.LittleEndian, &vramTimingEntries[i])
+	vramTimingOffset := int(dataTable.VRAMInfo) + len(vramInfoData)
+	vramTimingEntries := make([]AtomVRAMTimingEntry, numberOfVRAMModule)
+	for i := 0; i < AtomMaxVRAMEntries; i++ {
+		vramTimingEntry := AtomVRAMTimingEntry{}
+		err := restruct.Unpack(buffer[vramTimingOffset:], binary.LittleEndian, &vramTimingEntry)
 		if err != nil {
 			fmt.Println(chalk.Red, "Error unpacking timing entry: ", err, chalk.Reset)
 			os.Exit(1)
 		}
-		if vramTimingEntries[i].ClkRange == 0 {
+		if vramTimingEntry.ClkRange == 0 {
 			break
 		}
-		vramTimingPtr += 0x34
+		vramTimingEntries = append(vramTimingEntries, vramTimingEntry)
+		vramTimingOffset += 0x34
 	}
 	bios.AtomVRAMTimingEntry = vramTimingEntries
 	return bios
