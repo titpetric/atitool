@@ -1,7 +1,19 @@
 language: go
-
 go:
   - 1.8.x
-  
+
 script:
-  - make
+  - make linux
+  - make mac
+  - make windows
+
+deploy:
+  provider: releases
+  api_key:
+    secure: W9sLpz5wCpnJn3v9jxEAPkSpgDVWwjiK7ZGpv80VOm+YW5Dq4jHko7f0KJtZi7ZzDPo0GCKnnd49eD2RpygHPtnG14Ryz8L1emFfX5DD6DI/vd6hzWlx3rGSyX5qS/8uYvLi2ev4VutEdqSUdc7ags+Nvq72Y4RTG/2giVmALMYxhbxQMnUpuPEW5SnMFRRg53sCu/ZjqYODChDvmDRpoTgYg9T244pNnnbQUS/+lgSI7FXMj7u+cYxsSnRhwDkz7YtL/oxWRb4+7WSHNMbuO1JFMBek1VC3iICrjMso1hbgfoUwjeHavP41IDte3eGB+gHNOScr0O1xqx9Cu28UrwDh59bfQ8tSTFGL+68SN51onk/j6xFAfOkDxcy8D98A+0K0fhWKXOY0muRgPw1kEoXzeUl2bVhdPED7/qdOA2XbobYoq05kM83Z7OaX5ztdNl3CFCFXv3oV3G4TzFXidY0oh/yO114fkvqWNPVrToqcWoD0w+ZeWhwyR6UW6CLYHecGsuIoX4MEOgVKKTkj0Crgh1fZ9D1UmsAQDjgTiofM415ML1O00RaV/Eo3Q018gvNoobcltVocI4MLo0qSa4fpDyuBdTtBQ0OdCjRA9pD8E+g5XV5HbF1AiGkzsRgnpUboW9+yiKdjmS0UcgMjVKyOhRIlgfTLqHjjoRNrTkU=
+  file:
+    - atitool-linux-amd64
+    - atitool-mac-amd64
+    - atitool-windows-amd64.exe
+  on:
+    repo: kellabyte/atitool
