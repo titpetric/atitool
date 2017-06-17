@@ -30,6 +30,24 @@ Not tested
 make
 ```
 
+# Cross compiling for each platform
+Cross compiling currently only supports the `amd64` architecture.
+
+Linux
+```
+make linux
+```
+
+Mac
+```
+make mac
+```
+
+Windows
+```
+make windows
+```
+
 # Help
 ```
 usage: atitool [<flags>] <command> [<args> ...]
