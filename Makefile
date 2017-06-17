@@ -17,7 +17,7 @@ mac:
 	env GOOS=darwin GOARCH=amd64 go build -o atitool-mac-amd64
 
 windows:
-	env GOOS=windows GOARCH=amd64 go build -o atitool-windows-amd64
+	env GOOS=windows GOARCH=amd64 go build -o atitool-windows-amd64.exe
 
 $(glidepath)/glide:
 	git clone https://github.com/Masterminds/glide.git $(glidepath)
