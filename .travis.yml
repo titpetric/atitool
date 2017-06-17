@@ -15,5 +15,6 @@ deploy:
     - "atitool-linux-amd64"
     - "atitool-mac-amd64"
     - "atitool-windows-amd64.exe"
+  skip_cleanup: true
   on:
     repo: kellabyte/atitool
