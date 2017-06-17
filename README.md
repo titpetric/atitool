@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/kellabyte/atitool.svg?branch=master)](https://travis-ci.org/kellabyte/atitool)
+
 # atitool
 Atitool is a tool for reading ATI Radeon RX 400 and 500 series Polaris VBIOS ROM files. 
 
