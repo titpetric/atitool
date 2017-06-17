@@ -14,8 +14,9 @@ var (
 
 	VALID_BIOS_FILESIZE 	int64 	= 524288
 	ROM_CHECKSUM_OFFSET 	int32 	= 0x21
-	ROM_HEADER_PTR 		int32 	= 0x48
-	VRAM_ENTRIES_COUNT	int	= 0
+	ROM_HEADER_PTR 			int32 	= 0x48
+	VRAM_ENTRIES_COUNT		int		= 0
+	hasUnknownIds 			bool 	= false
 )
 
 func main() {
@@ -56,6 +57,12 @@ func openFile(filename string) {
 	displayGPU(bios)
 	//displayMemory(bios) // Crashes with panic: runtime error: index out of range
 	displayVRAM(bios)
+
+	fmt.Println()
+
+	if hasUnknownIds {
+		fmt.Println(chalk.Yellow, "Detected unsupported data. Please report your results and GPU model so we can add it.", chalk.Reset)
+	}
 }
 
 func displayRom(bios Bios) {
@@ -72,6 +79,9 @@ func displayRom(bios Bios) {
 		bios.AtomRomHeader.SubsystemVendorID, chalk.Reset)
 	fmt.Printf("%s%s%s0x%x%s\n", chalk.Bold, "Firmware signature: ", chalk.White,
 		bios.AtomRomHeader.FirmWareSignature, chalk.Reset)
+
+	fmt.Println("HIT!!!!: " + string(bios.AtomRomHeader.FirmWareSignature))
+
 }
 
 func displayPowerplay(bios Bios) {
@@ -200,11 +210,12 @@ func displayVRAM(bios Bios) {
 				memoryType = "HBM"
 			case MemoryTypeDDR3:
 				memoryType = "DDR3"
+			default:
+				hasUnknownIds = true
+				memoryType += fmt.Sprintf(" (0x%x)", bios.AtomVRAMEntry[i].MemoryType)
 			}
 			fmt.Printf("\t%s%s: %s%s %s\n", chalk.Bold, "Type", chalk.White,
 				memoryType, chalk.Reset)
-
-
 		}
 	}
 }
