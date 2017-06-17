@@ -8,6 +8,5 @@ import:
   version: ~0.1.0
 - package: gopkg.in/restruct.v1
   version: ~1.0.0
-- package: golang.org/x/text
-  subpackages:
-  - encoding/charmap
+- package: github.com/viyatb/gist
+  version: ~0.3.0

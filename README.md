@@ -27,7 +27,7 @@ Not tested
 
 # Compiling
 ```
-go build
+make
 ```
 
 # Help
