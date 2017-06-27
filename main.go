@@ -56,7 +56,7 @@ func openFile(filename string) {
 	displayFan(bios)
 	displayGPU(bios)
 	//displayMemory(bios) // Crashes with panic: runtime error: index out of range
-	//displayVRAM(bios)
+	displayVRAM(bios)
 
 	fmt.Println()
 

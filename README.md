@@ -75,10 +75,10 @@ atitool show stock.rom
 ----------------------------------------
 ROM
 ----------------------------------------
-VendorID: 0x1002
-DeviceID: 0x67df
+Vendor: AMD
+Device: Ellesmere core (Polaris 10 family)
 SubID: 0x3417
-SubVendorID: 0x1462
+SubVendorID: Micro-Star International Co Ltd
 Firmware signature: 0x4d4f5441
 
 ----------------------------------------
