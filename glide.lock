@@ -1,5 +1,5 @@
-hash: ab1378322c5d336bb3eebae052d872e5b428af27854051e100904381da7da16e
-updated: 2017-06-16T22:30:49.084242977-04:00
+hash: ca5faf31f3e3a9e7a63ec8444ce2cba47fbefbf2ea9256f572ad2f515bfc0e6a
+updated: 2017-06-27T00:19:40.791016866-04:00
 imports:
 - name: github.com/alecthomas/kingpin
   version: 7f0871f2e17818990e4eed73f9b5c2f429501228
@@ -9,10 +9,19 @@ imports:
   - parse
 - name: github.com/alecthomas/units
   version: 2efee857e7cfd4f3d0138cc3cbb1b4966962b93a
+- name: github.com/andybalholm/cascadia
+  version: 349dd0209470eabd9514242c688c403c0926d266
+- name: github.com/PuerkitoBio/goquery
+  version: e1271ee34c6a305e38566ecd27ae374944907ee9
 - name: github.com/ttacon/chalk
   version: 76b3c8b611dea8f83e49e9ce81fc2b189e0ef3d2
 - name: github.com/viyatb/gist
   version: 9fa4279010ac01564a4370f2422f4b94c8195e30
+- name: golang.org/x/net
+  version: 8b4af36cd21a1f85a7484b49feb7c79363106d8e
+  subpackages:
+  - html
+  - html/atom
 - name: gopkg.in/restruct.v1
   version: 80ede2e57cc280052ab88753387703aa62475571
 testImports: []

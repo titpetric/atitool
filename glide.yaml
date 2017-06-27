@@ -10,3 +10,5 @@ import:
   version: ~1.0.0
 - package: github.com/viyatb/gist
   version: ~0.3.0
+- package: github.com/PuerkitoBio/goquery
+  version: ~1.1.0
