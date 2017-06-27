@@ -56,7 +56,7 @@ func openFile(filename string) {
 	displayFan(bios)
 	displayGPU(bios)
 	//displayMemory(bios) // Crashes with panic: runtime error: index out of range
-	displayVRAM(bios)
+	//displayVRAM(bios)
 
 	fmt.Println()
 
@@ -69,19 +69,16 @@ func displayRom(bios Bios) {
 	fmt.Printf("\n%s----------------------------------------%s\n", chalk.Blue, chalk.Reset)
 	fmt.Printf("%s%s%s\n", chalk.Blue, "ROM", chalk.Reset)
 	fmt.Printf("%s----------------------------------------%s\n", chalk.Blue, chalk.Reset)
-	fmt.Printf("%s%s%s0x%x%s\n", chalk.Bold, "VendorID: ", chalk.White,
-		bios.AtomRomHeader.VendorID, chalk.Reset)
-	fmt.Printf("%s%s%s0x%x%s\n", chalk.Bold, "DeviceID: ", chalk.White,
-		bios.AtomRomHeader.DeviceID, chalk.Reset)
+	fmt.Printf("%s%s%s%s%s\n", chalk.Bold, "Vendor: ", chalk.White,
+		romVendorId(bios.AtomRomHeader.VendorID), chalk.Reset)
+	fmt.Printf("%s%s%s%s%s\n", chalk.Bold, "Device: ", chalk.White,
+		romDeviceId(bios.AtomRomHeader.DeviceID), chalk.Reset)
 	fmt.Printf("%s%s%s0x%x%s\n", chalk.Bold, "SubID: ", chalk.White,
 		bios.AtomRomHeader.SubsystemID, chalk.Reset)
-	fmt.Printf("%s%s%s0x%x%s\n", chalk.Bold, "SubVendorID: ", chalk.White,
-		bios.AtomRomHeader.SubsystemVendorID, chalk.Reset)
+	fmt.Printf("%s%s%s%s%s\n", chalk.Bold, "SubVendorID: ", chalk.White,
+		subVendorId(bios.AtomRomHeader.SubsystemVendorID), chalk.Reset)
 	fmt.Printf("%s%s%s0x%x%s\n", chalk.Bold, "Firmware signature: ", chalk.White,
 		bios.AtomRomHeader.FirmWareSignature, chalk.Reset)
-
-	fmt.Println("HIT!!!!: " + string(bios.AtomRomHeader.FirmWareSignature))
-
 }
 
 func displayPowerplay(bios Bios) {
