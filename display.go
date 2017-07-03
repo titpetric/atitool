@@ -111,3 +111,21 @@ func subVendorId(field uint16) string {
 
 	return subVendorName
 }
+
+
+func vramVendorId(field byte) string {
+	vendorId := uint16(field)
+
+
+
+
+	switch vendorId {
+	case 0x3:
+		return "Elpida"
+	case 0x66:
+		return "Hynix"
+	default:
+		hasUnknownIds = true
+		return fmt.Sprintf("0x%x", field)
+	}
+}

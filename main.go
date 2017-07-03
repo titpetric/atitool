@@ -185,7 +185,7 @@ func displayVRAM(bios Bios) {
 			fmt.Printf("%s%s: %s%s %s\n", chalk.Bold, "Part num", chalk.White,
 				string(bios.AtomVRAMEntry[i].MemPNString[:10]), chalk.Reset)
 			fmt.Printf("\t%s%s: %s0x%x %s\n", chalk.Bold, "VendorID", chalk.White,
-				bios.AtomVRAMEntry[i].MemoryVenderID, chalk.Reset)
+				vramVendorId(bios.AtomVRAMEntry[i].MemoryVenderID), chalk.Reset)
 			fmt.Printf("\t%s%s: %s%d %s\n", chalk.Bold, "Size (MB)", chalk.White,
 				bios.AtomVRAMEntry[i].MemorySize, chalk.Reset)
 			fmt.Printf("\t%s%s: %s0x%x %s\n", chalk.Bold, "Density", chalk.White,
