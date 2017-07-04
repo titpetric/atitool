@@ -14,6 +14,55 @@ const (
 	MemoryTypeDDR3 		= 0xB0
 )
 
+var vramVendors = map[byte]string{
+	0x1: "Samsung",
+	0x2 : "Infineon",
+	0x3 : "Elpida",
+	0x4 : "Etron",
+	0x5 : "Nanya",
+	0x6 : "Hynix",
+	0x7 : "Mosel",
+	0x8 : "Winbond",
+	0x9 : "ESMT",
+	0xF : "Micron",
+}
+
+var vramDensity = map[byte]string{
+	0x2: "4M x 16",
+	0x3 : "4M x 32",
+	0x12 : "8M x 16",
+	0x13 : "8M x 32",
+	0x15 : "8M x 128",
+	0x22 : "16M x 16",
+	0x23 : "16M x 32",
+	0x25 : "16M x 128",
+	0x32 : "32M x 16",
+	0x33 : "32M x 32",
+	0x35 : "32M x 128",
+	0x41 : "64M x 8",
+	0x42 : "64M x 16",
+	0x43 : "64M x 32",
+	0x45 : "64M x 128",
+	0x51 : "128M x 8",
+	0x52 : "128M x 16",
+	0x53 : "128M x 32",
+	0x61 : "256M x 8",
+	0x62 : "256M x 16",
+	0x63 : "256M x 32",
+	0x71 : "512M x 8",
+	0x72 : "512M x 16",
+}
+
+var vramType = map[byte]string{
+	0x10: "GDDR1",
+	0x20: "DDR2",
+	0x30: "GDDR3",
+	0x40: "GDDR4",
+	0x50: "GDDR5",
+	0x60: "HBM",
+	0xB0: "DDR3",
+}
+
 type Bios struct {
 	AtomRomHeader AtomRomHeader
 	AtomDataTables AtomDataTables

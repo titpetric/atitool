@@ -70,15 +70,18 @@ func displayRom(bios Bios) {
 	fmt.Printf("%s%s%s\n", chalk.Blue, "ROM", chalk.Reset)
 	fmt.Printf("%s----------------------------------------%s\n", chalk.Blue, chalk.Reset)
 	fmt.Printf("%s%s%s%s%s\n", chalk.Bold, "Vendor: ", chalk.White,
-		romVendorId(bios.AtomRomHeader.VendorID), chalk.Reset)
+		displayRomVendorId(bios.AtomRomHeader.VendorID), chalk.Reset)
 	fmt.Printf("%s%s%s%s%s\n", chalk.Bold, "Device: ", chalk.White,
-		romDeviceId(bios.AtomRomHeader.DeviceID), chalk.Reset)
+		displayRomDeviceId(bios.AtomRomHeader.DeviceID), chalk.Reset)
 	fmt.Printf("%s%s%s0x%x%s\n", chalk.Bold, "SubID: ", chalk.White,
 		bios.AtomRomHeader.SubsystemID, chalk.Reset)
 	fmt.Printf("%s%s%s%s%s\n", chalk.Bold, "SubVendorID: ", chalk.White,
-		subVendorId(bios.AtomRomHeader.SubsystemVendorID), chalk.Reset)
+		displaySubVendorId(bios.AtomRomHeader.SubsystemVendorID), chalk.Reset)
 	fmt.Printf("%s%s%s0x%x%s\n", chalk.Bold, "Firmware signature: ", chalk.White,
 		bios.AtomRomHeader.FirmWareSignature, chalk.Reset)
+
+	fmt.Printf("0x%x\n", bios.AtomRomHeader.SubsystemVendorID)
+	fmt.Printf("0x%x\n", bios.AtomRomHeader.SubsystemID)
 }
 
 func displayPowerplay(bios Bios) {
@@ -184,35 +187,37 @@ func displayVRAM(bios Bios) {
 
 			fmt.Printf("%s%s: %s%s %s\n", chalk.Bold, "Part num", chalk.White,
 				string(bios.AtomVRAMEntry[i].MemPNString[:10]), chalk.Reset)
-			fmt.Printf("\t%s%s: %s0x%x %s\n", chalk.Bold, "VendorID", chalk.White,
-				vramVendorId(bios.AtomVRAMEntry[i].MemoryVenderID), chalk.Reset)
+			fmt.Printf("\t%s%s: %s%s %s\n", chalk.Bold, "VendorID", chalk.White,
+				displayVramVendorId(bios.AtomVRAMEntry[i].MemoryVenderID), chalk.Reset)
 			fmt.Printf("\t%s%s: %s%d %s\n", chalk.Bold, "Size (MB)", chalk.White,
 				bios.AtomVRAMEntry[i].MemorySize, chalk.Reset)
-			fmt.Printf("\t%s%s: %s0x%x %s\n", chalk.Bold, "Density", chalk.White,
-				bios.AtomVRAMEntry[i].Density, chalk.Reset)
-
-			memoryType := "Unknown"
-			switch bios.AtomVRAMEntry[i].MemoryType {
-			case MemoryTypeGDDR1:
-				memoryType = "GDDR1"
-			case MemoryTypeDDR2:
-				memoryType = "DDR2"
-			case MemoryTypeGDDR3:
-				memoryType = "GDDR3"
-			case MemoryTypeGDDR4:
-				memoryType = "GDDR4"
-			case MemoryTypeGDDR5:
-				memoryType = "GDDR5"
-			case MemoryTypeHBM:
-				memoryType = "HBM"
-			case MemoryTypeDDR3:
-				memoryType = "DDR3"
-			default:
-				hasUnknownIds = true
-				memoryType += fmt.Sprintf(" (0x%x)", bios.AtomVRAMEntry[i].MemoryType)
-			}
+			fmt.Printf("\t%s%s: %s%s %s\n", chalk.Bold, "Density", chalk.White,
+				displayVramDensity(bios.AtomVRAMEntry[i].Density), chalk.Reset)
 			fmt.Printf("\t%s%s: %s%s %s\n", chalk.Bold, "Type", chalk.White,
-				memoryType, chalk.Reset)
+				displayVramType(bios.AtomVRAMEntry[i].MemoryType), chalk.Reset)
+
+			//memoryType := "Unknown"
+			//switch bios.AtomVRAMEntry[i].MemoryType {
+			//case MemoryTypeGDDR1:
+			//	memoryType = "GDDR1"
+			//case MemoryTypeDDR2:
+			//	memoryType = "DDR2"
+			//case MemoryTypeGDDR3:
+			//	memoryType = "GDDR3"
+			//case MemoryTypeGDDR4:
+			//	memoryType = "GDDR4"
+			//case MemoryTypeGDDR5:
+			//	memoryType = "GDDR5"
+			//case MemoryTypeHBM:
+			//	memoryType = "HBM"
+			//case MemoryTypeDDR3:
+			//	memoryType = "DDR3"
+			//default:
+			//	hasUnknownIds = true
+			//	memoryType += fmt.Sprintf(" (0x%x)", bios.AtomVRAMEntry[i].MemoryType)
+			//}
+			//fmt.Printf("\t%s%s: %s%s %s\n", chalk.Bold, "Type", chalk.White,
+			//	memoryType, chalk.Reset)
 		}
 	}
 }

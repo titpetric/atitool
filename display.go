@@ -5,7 +5,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func romVendorId(field uint16) string {
+func displayRomVendorId(field uint16) string {
 	switch field {
 	case 0x1002:
 		return "AMD"
@@ -15,7 +15,7 @@ func romVendorId(field uint16) string {
 	}
 }
 
-func romDeviceId(field uint16) string {
+func displayRomDeviceId(field uint16) string {
 	switch field {
 	case 0x67c0:
 		return "Ellesmere core (Polaris 10 family)"
@@ -65,7 +65,7 @@ func romDeviceId(field uint16) string {
 	}
 }
 
-func subVendorId(field uint16) string {
+func displaySubVendorId(field uint16) string {
 	baseUrl := "http://pcidatabase.com"
 	url := fmt.Sprintf("%s/search.php?vendor_search_str=0x%x&vendor_search.x=0&vendor_search.y=0&vendor_search=search+vendors",
 		baseUrl,
@@ -113,19 +113,38 @@ func subVendorId(field uint16) string {
 }
 
 
-func vramVendorId(field byte) string {
-	vendorId := uint16(field)
+func displayVramVendorId(field byte) string {
+	id := field & 0x0F
 
-
-
-
-	switch vendorId {
-	case 0x3:
-		return "Elpida"
-	case 0x66:
-		return "Hynix"
-	default:
+	value, found := vramVendors[id]
+	if !found {
 		hasUnknownIds = true
-		return fmt.Sprintf("0x%x", field)
+		return fmt.Sprintf("%d", field)
 	}
+	return value
+
+}
+
+func displayVramDensity(field byte) string {
+	id := field & 0x0F
+
+	value, found := vramDensity[id]
+	if !found {
+		hasUnknownIds = true
+		return fmt.Sprintf("%d", field)
+	}
+	return value
+
+}
+
+func displayVramType(field byte) string {
+	id := field
+
+	value, found := vramType[id]
+	if !found {
+		hasUnknownIds = true
+		return fmt.Sprintf("%d", field)
+	}
+	return value
+
 }
