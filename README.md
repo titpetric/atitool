@@ -75,8 +75,6 @@ atitool show stock.rom
 ----------------------------------------
 ROM
 ----------------------------------------
-Vendor: AMD
-Device: Ellesmere core (Polaris 10 family)
 SubID: 0x3417
 SubVendorID: Micro-Star International Co Ltd
 Firmware signature: 0x4d4f5441
@@ -131,14 +129,14 @@ GPU
 VRAM
 ----------------------------------------
 Part num: EDW4032BAB
-	VendorID: 0x3
+	VendorID: Elpida
 	Size (MB): 4096
-	Density: 0x53
+	Density: 4M x 32
 	Type: GDDR5
 
 Part num: H5GC4H24AJ
-	VendorID: 0x66
+	VendorID: Hynix
 	Size (MB): 4096
-	Density: 0x53
+	Density: 4M x 32
 	Type: GDDR5
 ```

@@ -69,19 +69,12 @@ func displayRom(bios Bios) {
 	fmt.Printf("\n%s----------------------------------------%s\n", chalk.Blue, chalk.Reset)
 	fmt.Printf("%s%s%s\n", chalk.Blue, "ROM", chalk.Reset)
 	fmt.Printf("%s----------------------------------------%s\n", chalk.Blue, chalk.Reset)
-	fmt.Printf("%s%s%s%s%s\n", chalk.Bold, "Vendor: ", chalk.White,
-		displayRomVendorId(bios.AtomRomHeader.VendorID), chalk.Reset)
-	fmt.Printf("%s%s%s%s%s\n", chalk.Bold, "Device: ", chalk.White,
-		displayRomDeviceId(bios.AtomRomHeader.DeviceID), chalk.Reset)
 	fmt.Printf("%s%s%s0x%x%s\n", chalk.Bold, "SubID: ", chalk.White,
 		bios.AtomRomHeader.SubsystemID, chalk.Reset)
 	fmt.Printf("%s%s%s%s%s\n", chalk.Bold, "SubVendorID: ", chalk.White,
 		displaySubVendorId(bios.AtomRomHeader.SubsystemVendorID), chalk.Reset)
 	fmt.Printf("%s%s%s0x%x%s\n", chalk.Bold, "Firmware signature: ", chalk.White,
 		bios.AtomRomHeader.FirmWareSignature, chalk.Reset)
-
-	fmt.Printf("0x%x\n", bios.AtomRomHeader.SubsystemVendorID)
-	fmt.Printf("0x%x\n", bios.AtomRomHeader.SubsystemID)
 }
 
 func displayPowerplay(bios Bios) {

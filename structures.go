@@ -100,10 +100,8 @@ type AtomRomHeader struct {
 	MasterCommandTableOffset  uint16
 	MasterDataTableOffset     uint16
 	ExtendedFunctionCode      byte
-	_                         byte
+	_		                  byte
 	PSPDirTableOffset         uint32
-	VendorID                  uint16
-	DeviceID                  uint16
 }
 
 type AtomDataTables struct {
