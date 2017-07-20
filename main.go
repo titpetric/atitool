@@ -147,8 +147,8 @@ func displayGPU(bios Bios) {
 	count := int(bios.AtomSClkTable.NumEntries)
 	for i := 0; i < count; i++ {
 		index := int(bios.AtomSClkTable.Entries[i].VddInd)
-		fmt.Printf("%s%d %s: %s%d %s%s\n", chalk.Bold, bios.AtomSClkTable.Entries[i].Sclk / 100, "mV", chalk.White,
-			bios.AtomVoltageTable.Entries[index].Vdd, "Mhz", chalk.Reset)
+		fmt.Printf("%s%d %s: %s%d %s%s\n", chalk.Bold, bios.AtomSClkTable.Entries[i].Sclk / 100, "Mhz", chalk.White,
+			bios.AtomVoltageTable.Entries[index].Vdd, "mV", chalk.Reset)
 	}
 }
 
