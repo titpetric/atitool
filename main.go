@@ -37,9 +37,8 @@ func openFile(filename string) {
 		fmt.Println(chalk.Red, err, chalk.Reset)
 		os.Exit(1)
 	}
-	if fi.Size()  != VALID_BIOS_FILESIZE && fi.Size() != VALID_BIOS_FILESIZE / 2 {
-		fmt.Println(chalk.Red, "This BIOS is non standard size. Flashing this BIOS may corrupt your graphics card.", chalk.Reset)
-		os.Exit(1)
+	if fi.Size() < VALID_BIOS_FILESIZE {
+		fmt.Println(chalk.Red, "This BIOS is less than the standard 512KB size.\nFlashing this BIOS may corrupt your graphics card.", chalk.Reset)
 	}
 
 	buffer := make([]byte, fi.Size())
